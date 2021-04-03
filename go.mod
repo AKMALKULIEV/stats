@@ -1,4 +1,4 @@
-module github.com/AKMALKULIEV/stats
+module github.com/AKMALKULIEV/stats/v2
 
 go 1.16
 

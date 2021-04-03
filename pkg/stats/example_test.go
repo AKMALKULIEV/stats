@@ -9,14 +9,16 @@ import (
 func ExampleAvg() {
 	payments := []types.Payment{
 		{
-			ID:       0,
-			Amount:   50,
+			ID: 0,
+			Amount: 50,
 			Category: "",
+			Status: "FAIL",
 		},
 		{
-			ID:       0,
-			Amount:   50,
+			ID: 0,
+			Amount: 50,
 			Category: "",
+			Status: "",
 		},
 	}
 	fmt.Println(Avg(payments))
@@ -27,14 +29,16 @@ func ExampleAvg() {
 func ExampleTotalInCategory() {
 	payments := []types.Payment{
 		{
-			ID:       0,
-			Amount:   50,
+			ID: 0,
+			Amount: 50,
 			Category: "",
+			Status: "FAIL",
 		},
 		{
-			ID:       0,
-			Amount:   50,
+			ID: 0,
+			Amount: 50,
 			Category: "Abs",
+			Status: "",
 		},
 	}
     category := "Abs"
