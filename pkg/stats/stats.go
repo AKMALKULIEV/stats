@@ -4,31 +4,34 @@ import (
 	"github.com/AKMALKULIEV/bank/v2/pkg/types"
 )
 
+//Avg расчитовает среднюю сумму платежа
 func Avg(payments []types.Payment) types.Money {
-	sum := types.Money(0)
-	
-	num := 0
+	// countPayments := types.Money(len(payments))
+	sumPaymenys := types.Money(0)
+	indexPayments := types.Money(0)
 	for _, payment := range payments {
-		sum += payment.Amount
-
-	}
-	for _, payment := range payments {
-		if payment.Amount < 0  && payment.Status == "FAIL" {
+		if payment.Status == types.StatusFail {
 			continue
 		}
-		num += 1
+		moneyPayments := payment.Amount
+		sumPaymenys += moneyPayments
+		indexPayments++
 	}
-	return sum / types.Money(num)
+	return sumPaymenys / indexPayments
 }
 
+// TotalInCategory находит   сумму покупок в определённой категории.
 func TotalInCategory(payments []types.Payment, category types.Category) types.Money {
-	sum := types.Money(0)
+	sumPaymenys := types.Money(0)
 	for _, payment := range payments {
-		if payment.Category != category && payment.Status == "FAIL" {
+		if payment.Category != category {
 			continue
 		}
-		mPayments := payment.Amount
-		sum += mPayments
+		if payment.Status == types.StatusFail {
+			continue
+		}
+		moneyPayments := payment.Amount
+		sumPaymenys += moneyPayments
 	}
-	return sum
+	return sumPaymenys
 }
