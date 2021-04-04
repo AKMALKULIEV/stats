@@ -7,6 +7,24 @@ import (
 	"github.com/AKMALKULIEV/bank/v2/pkg/types"
 )
 
+func Test(t *testing.T) {
+	payments := []types.Payment{
+		{ID: 1, Amount: 10, Category: "auto"},
+		{ID: 1, Amount: 10, Category: "auto"},
+		{ID: 1, Amount: 10, Category: "mobile"},
+		{ID: 1, Amount: 10, Category: "fun"},
+	}
+	expected := map[types.Category]types.Money{
+		"auto":   20,
+		"mobile": 10,
+		"fun":    20,
+	}
+	result := CategoriesTotal(payments)
+
+	if !reflect.DeepEqual(expected, result) {
+		t.Errorf("something wrong expected: %v ,result: %v", expected, result)
+	}
+}
 func TestFilterByCategory_nil(t *testing.T) {
 	var payments []types.Payment
 	result := FilterByCategory(payments, "mobile")
@@ -77,3 +95,4 @@ func TestFilterByCategory_foundMultiple(t *testing.T) {
 		t.Errorf("invalid result, expected: %v, actual: %v", expected, result)
 	}
 }
+
