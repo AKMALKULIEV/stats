@@ -84,3 +84,17 @@ func CategoriesTotal(payments []types.Payment) map[types.Category]types.Money {
 	return categories
 }
 
+func PeriodDynamic(
+	first map[types.Category]types.Money, second map[types.Category]types.Money) map[types.Category]types.Money {
+		amount := map[types.Category]types.Money{}
+
+		for sum := range second {
+		  amount[sum] += second[sum]
+		}
+	  
+		for sum := range first {
+		  amount[sum] -= first[sum]
+		}
+	  
+		return amount
+	  }

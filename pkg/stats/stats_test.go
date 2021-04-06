@@ -97,3 +97,26 @@ func TestFilterByCategory_foundMultiple(t *testing.T) {
 	}
 }
 
+func TestPeriodDynamic(t *testing.T) {
+
+	first := map[types.Category]types.Money{
+		"auto":   100,
+		"mobile": 5000,
+	}
+
+	second := map[types.Category]types.Money{
+		"auto":   100,
+		"mobile": -5000,
+		"fun":    10,
+	}
+	expected := map[types.Category]types.Money{
+		"auto":   0,
+		"mobile": -10000,
+		"fun":    10,
+	}
+	result := PeriodDynamic(first, second)
+
+	if !reflect.DeepEqual(expected, result) {
+		t.Errorf("something wrong expected: %v ,result: %v", expected, result)
+	}
+}
